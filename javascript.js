@@ -1,4 +1,8 @@
-//function which selects random options for computer
+//this asks for players choice
+const playerSelection = prompt("Select your option:");
+console.log(playerSelection);
+
+//function which selects randomly from Rock,Paper and Scissors
 //Array from which getComputerChoice function select option
 const computerChoice = ["Rock", "Paper", "Scissors"];
 function getComputerChoice(min, max){
@@ -8,4 +12,5 @@ function getComputerChoice(min, max){
         
 const computerSelection = getComputerChoice(0,2);
 console.log(computerSelection);
+
 
