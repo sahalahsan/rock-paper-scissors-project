@@ -1,43 +1,53 @@
-//this asks for the player choice
-let playerChoice = prompt("Select your option:");
-//making the playerChoice titlecase(Only first letter is capital)
-let fisrtLetterCapital = playerChoice.charAt(0).toUpperCase();
-let remainingLetterssmall =  playerChoice.slice(1).toLowerCase();
-const playerSelection = fisrtLetterCapital + remainingLetterssmall
-console.log(playerSelection);
+let playerSelection;
+let computerSelection;
+let tied = 0;
+let won = 0;
+let lost = 0;
 
-//function which selects randomly from Rock,Paper and Scissors as computer choice
-const computerChoice = ["Rock", "Paper", "Scissors"];
-function getComputerChoice(min, max){
+//Function that plays single round of Rock Paper Scissors
+function playRound(playerSelection, computerSelection){
+
+  //User Input  
+  const playerChoice = prompt("Select your option:");
+  let fisrtLetterCapital = playerChoice.charAt(0).toUpperCase();
+  let remainingLetterssmall =  playerChoice.slice(1).toLowerCase();
+  playerSelection = fisrtLetterCapital + remainingLetterssmall;
+
+  const computerChoice = ["Rock", "Paper", "Scissors"];
+
+  //Function that randomly selects Rock Paper Scissors as Computers Choice
+  function getComputerChoice(min, max){
     let num = Math.floor(Math.random() * (max - min + 1) + min );
     return computerChoice[num] ;
-    }
-        
-let computerSelection = getComputerChoice(0,2);
-console.log(computerSelection);
- 
-//function which copmares both options and return results
-function playRound(playerSelection, computerSelection){
-    if(playerSelection == computerSelection){
-         return "A Tie";
+  }
+  computerSelection = getComputerChoice(0,2);
+  if(playerSelection == computerSelection){
+      ++tied;
+      return "A Tie";
     } else if(
       playerSelection == "Rock" && computerSelection == "Scissors"  ||    
       playerSelection == "Paper" && computerSelection == "Rock"  ||
       playerSelection == "Scissors" && computerSelection == "Paper"){
-         return `You Won!${playerSelection} beats ${computerSelection}`;
+      ++won;
+      return `You Won!${playerSelection} beats ${computerSelection}`;
     } else{
-        return  `You Lose!${computerSelection} beats ${playerSelection}`;
+      ++lost;
+      return  `You Lose!${computerSelection} beats ${playerSelection}`;
     }   
 }
-const result =  playRound(playerSelection, computerSelection);
-console.log(result);
 
-//function which loops through playRound five times
-//function game(){
-    //for(var i=1; i <= 5; i++){
-       //let n = playRound(playerSelection, computerSelection);
-      // console.log(playRound(playerSelection, computerSelection));
-    //}
-//}
-//console.log(game());
-//console.log(playRound(playerSelection, computerSelection));
+//Function which runs playRound function five times and announce rounds result
+function game(){
+  for(let i=0;i<5;i++){
+    console.log(playRound(playerSelection, computerSelection));
+  }
+  if(tied === 5 || won === lost){
+    return "Round Tied";
+  } else if(won > lost){
+    return "You Won the Round";
+  } else{
+    return "You Lost the Round";
+  }
+}
+console.log(game());
+ 
