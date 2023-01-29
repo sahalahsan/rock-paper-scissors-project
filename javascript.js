@@ -1,62 +1,29 @@
-function functionOne(playerSelection = "Rock", computerSelection){
+//Accessing the div element
+var btnList = document.querySelector(".options");
+
+//Accessing the result container
+var resultContainer = document.querySelector("#result");
+
+//Adding eventListener 
+btnList.addEventListener("click", playRound);
+
+//Function playing RPS(playRound)
+function playRound(e) {
+  let playerSelection = e.target.value;
   function randomOption(){
     const optionsArray = ["Rock", "Paper", "Scissors"];
     const randomIndexNo =  Math.floor(Math.random()*optionsArray.length);
     return optionsArray[randomIndexNo];
   }
-  computerSelection = randomOption();
-
+  let computerSelection = randomOption();
   if(playerSelection == computerSelection){
-    console.log("A Tie");
-  } else if(
-    playerSelection == "Rock" && computerSelection == "Scissors"  ||    
-    playerSelection == "Paper" && computerSelection == "Rock"  ||
-    playerSelection == "Scissors" && computerSelection == "Paper"){
-    console.log(`You Won!${playerSelection} beats ${computerSelection}`);
-  } else{
-    console.log( `You Lose!${computerSelection} beats ${playerSelection}`);
-  }   
-}
-
-//Function Two
-function functionTwo(playerSelection = "Paper", computerSelection){
-  function randomOption(){
-    const optionsArray = ["Rock", "Paper", "Scissors"];
-    const randomIndexNo =  Math.floor(Math.random()*optionsArray.length);
-    return optionsArray[randomIndexNo];
-  }
-  computerSelection = randomOption();
-
-  if(playerSelection == computerSelection){
-    console.log("A Tie");
-  } else if(
-    playerSelection == "Rock" && computerSelection == "Scissors"  ||    
-    playerSelection == "Paper" && computerSelection == "Rock"  ||
-    playerSelection == "Scissors" && computerSelection == "Paper"){
-    console.log(`You Won!${playerSelection} beats ${computerSelection}`);
-  } else{
-    console.log( `You Lose!${computerSelection} beats ${playerSelection}`);
-  }   
-}
-
-//Function Three
-function functionThree(playerSelection = "Scissors", computerSelection){
-  function randomOption(){
-    const optionsArray = ["Rock", "Paper", "Scissors"];
-    const randomIndexNo =  Math.floor(Math.random()*optionsArray.length);
-    return optionsArray[randomIndexNo];
-  }
-  computerSelection = randomOption();
-
-  if(playerSelection == computerSelection){
-    console.log("A Tie");
-  } else if(
-    playerSelection == "Rock" && computerSelection == "Scissors"  ||    
-    playerSelection == "Paper" && computerSelection == "Rock"  ||
-    playerSelection == "Scissors" && computerSelection == "Paper"){
-    console.log(`You Won!${playerSelection} beats ${computerSelection}`);
-  } else{
-    console.log( `You Lose!${computerSelection} beats ${playerSelection}`);
-  }   
-}
-
+    resultContainer.textContent =  "A Tie";
+ } else if(
+   playerSelection == "Rock" && computerSelection == "Scissors"  ||    
+   playerSelection == "Paper" && computerSelection == "Rock"  ||
+   playerSelection == "Scissors" && computerSelection == "Paper"){
+    resultContainer.textContent = `You Won!${playerSelection} beats ${computerSelection}`;
+ } else {
+  resultContainer.textContent = `You Lose!${computerSelection} beats ${playerSelection}`;
+ }  
+};
